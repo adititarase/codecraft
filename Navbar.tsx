@@ -135,6 +135,12 @@ const Navbar: React.FC<NavbarProps> = ({ currentView, onViewChange }) => {
         >
           ❓ Help
         </NavButton>
+        <NavButton 
+          active={currentView === 'quiz'} 
+          onClick={() => onViewChange('quiz')} // <-- Add Quiz navigation
+        >
+          🧩 Quiz
+        </NavButton>
         <ThemeToggle onClick={toggleTheme}>
           {isDarkMode ? '🌞' : '🌙'}
         </ThemeToggle>
