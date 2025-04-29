@@ -13,6 +13,7 @@ import JavaInfo from './components/JavaInfo';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import LandingPage from './components/LandingPage';
+import Quiz from './components/Quiz';
 import { ThemeProvider } from './theme/ThemeContext';
 import { AuthProvider, useAuth } from './theme/AuthContext';
 
@@ -32,7 +33,7 @@ const MainContent = styled.div`
   min-height: 0;
 `;
 
-export type View = 'home' | 'courses' | 'assignments' | 'progress' | 'help' | 'topic';
+export type View = 'home' | 'courses' | 'assignments' | 'progress' | 'help' | 'topic'|'quiz';
 
 // Main App for authenticated users
 const MainApp: React.FC = () => {
@@ -57,6 +58,8 @@ const MainApp: React.FC = () => {
         return <HelpView />;
       case 'topic':
         return <TopicView topic={currentTopic} />;
+      case 'quiz':
+        return <Quiz />;
       case 'home':
       default:
         return (
@@ -91,6 +94,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/" element={isAuthenticated ? <Navigate to="/assignments" replace /> : <LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/quiz" element={isAuthenticated ? <Quiz /> : <Navigate to="/" replace />} />
       <Route
         path="*"
         element={isAuthenticated ? <MainApp /> : <Navigate to="/" replace />}
